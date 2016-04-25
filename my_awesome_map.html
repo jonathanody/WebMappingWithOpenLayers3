@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="ISO-8859-1">
     <title>My Awesome Map</title>
@@ -8,15 +9,40 @@
             width: 600px;
             height: 400px;
             border: 1px solid #000;
-        }    
+        }
     </style>
     <script src="http://openLayers.org/en/v3.10.1/build/ol.js"></script>
     <link rel="stylesheet" href="http://openLayers.org/en/v3.10.1/css/ol.css">
 </head>
+
 <body>
     <div id="mymap"></div>
     <script>
+        var myLayer = new ol.layer.Tile({
+            source: new ol.source.OSM()
+        });
+
+        // multiple layers can be passed to the ol instance in an array
+        var myLayers = [myLayer];
+
+        // center of the USA
+        var centerCoords = [-95, 45];
         
+        // transform from EPS:4326 projection to ESPG:3857
+        var transCoords = ol.proj.transform(centerCoords, 'EPSG:4326', 'EPSG:3857');
+        console.log(transCoords);
+
+        var myView = new ol.View({
+            center: transCoords,
+            zoom: 3
+        });
+
+        var map = new ol.Map({
+            target: 'mymap',
+            layers: myLayers,
+            view: myView
+        });
     </script>
 </body>
+
 </html>
