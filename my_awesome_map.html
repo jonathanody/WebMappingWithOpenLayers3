@@ -40,8 +40,16 @@
         feature.setId('Hornsea');
         feature.setStyle(squareStyle);
         
+        var coords2 = [-86.9125, 40.4419];
+        var point2 = new ol.geom.Point(ol.proj.transform(coords2, 'EPSG:4326', 'EPSG:3857'));
+        var feature2 = new ol.Feature({
+            geometry: point2
+        });
+        feature2.setId('West Lafayette');
+        feature2.setStyle(squareStyle);
+        
         var myVectorSource = new ol.source.Vector({
-            features: [feature]
+            features: [feature, feature2]
         });
         
         var myVectorLayer = new ol.layer.Vector({
