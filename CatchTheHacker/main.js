@@ -44,6 +44,14 @@
             layers: [streetmapLayer, vectorLayer],
             view: myView
         });
+        
+        map.on('click', function(evt) {
+            map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+                if (feature) {
+                    catchHacker();
+                }
+            })
+        });
     }
     
     function initializeTimer() {
