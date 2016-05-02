@@ -80,6 +80,12 @@
             layers: myLayers,
             view: myView
         });
+        
+        map.on('click', function(evt) {
+            map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+                alert(feature.getId());
+            });
+        })
     </script>
 </body>
 
